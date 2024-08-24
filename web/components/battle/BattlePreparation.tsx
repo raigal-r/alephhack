@@ -28,7 +28,7 @@ const teamMockedData: MemeData[] = [
     img: '/MAGAIBA_profile.png',
   },
 ];
-console.log({teamMockedData})
+console.log({ teamMockedData });
 
 export default function BattlePreparation() {
   const [isBattleFound, setIsBattleFound] = useState(false);
@@ -47,11 +47,10 @@ export default function BattlePreparation() {
   ) => {
     attack(memeId, powerName, targetMemeId);
   };
-  
 
   const handleReady = () => {
-    console.log('Playez is ready!');
-    setGameStage('battle')
+    console.log('Battle begins!');
+    setGameStage('battle');
   };
 
   return (
@@ -87,7 +86,8 @@ export default function BattlePreparation() {
                   key={`enemy_${elem.lvl}_${elem.name}`}
                   {...elem}
                 />
-              )))}
+              ))
+            )}
             {/* // ) : (
             //   <p className="text-center text-sm">No opponent found</p>
             // )} */}
@@ -97,10 +97,8 @@ export default function BattlePreparation() {
       <div className="mt-auto pb-4 px-4">
         <Button
           onClick={handleReady}
-          className={`mt-4 ${
-            !battleState.battleStarted ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          disabled={!battleState.battleStarted}
+          className={`mt-4 `}
+          visible={battleState?.battleStarted}
         >
           Ready!
         </Button>
