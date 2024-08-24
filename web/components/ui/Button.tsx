@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
+  visible?: boolean;
 }
 
 export default function Button({
@@ -12,6 +13,7 @@ export default function Button({
   onClick,
   className = '',
   disabled = false,
+  visible = true
 }: ButtonProps) {
   return (
     <button
@@ -20,7 +22,8 @@ export default function Button({
       className={`
         btn btn-black text-white max-w-[380px] text-2xl font-medium mx-auto w-full
         flex items-center justify-center
-        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        ${visible ? 'visible' : 'invisible'}
+        ${disabled && ' cursor-not-allowed'}
         ${className}
       `}
     >
