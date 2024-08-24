@@ -1,6 +1,7 @@
 import WebSocket from 'ws';
 import { Player } from '../models/player.model';
 import { MemeProvider } from './meme.provider';
+import { Meme } from '../models/meme.model';
 
 export class PlayerProvider {
   private players: Record<string, Player> = {};
@@ -13,7 +14,7 @@ export class PlayerProvider {
   addPlayer(playerId: string, socket: WebSocket) {
     const memes = this.memeProvider.assignMemesToPlayer();
     this.players[playerId] = { id: playerId, socket, memes };
-    console.log(`[PlayerProvider] Player ${playerId} added with memes`);
+    console.log(`[PlayerProvider] Player ${playerId} added with memes:`, memes);
   }
 
   removePlayer(playerId: string) {
@@ -29,13 +30,9 @@ export class PlayerProvider {
     return this.players;
   }
 
-  getMemeHealth(playerId: string, memeId: string): number | null {
+  getMemesForPlayer(playerId: string): Meme[] | undefined {
     const player = this.players[playerId];
-    if (player) {
-      const meme = player.memes.find(m => m.id === memeId);
-      return meme ? meme.health : null;
-    }
-    return null;
+    return player ? player.memes : undefined;
   }
 
   updateMemeHealth(playerId: string, memeId: string, damage: number): number | null {

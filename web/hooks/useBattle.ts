@@ -39,6 +39,7 @@ export function useBattle() {
 
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
+      console.log({data})
       
       if (data.status === 'battle_started') {
         setBattleState({
@@ -47,24 +48,41 @@ export function useBattle() {
           playerMemes: data.playerMemes,
           opponentMemes: data.opponentMemes,
         });
-      } else if (data.status === 'attack_successful' || data.status === 'attacked') {
-        setBattleState((prevState) => ({
-          ...prevState,
-          playerMemes: {
-            ...prevState.playerMemes,
-            [data.memeId]: {
-              ...prevState.playerMemes[data.memeId],
-              health: data.playerMemeHealth
-            }
-          },
-          opponentMemes: {
-            ...prevState.opponentMemes,
-            [data.memeId]: {
-              ...prevState.opponentMemes[data.memeId],
-              health: data.opponentMemeHealth
-            }
-          }
-        }));
+      } else if (data.status === 'attack_successful'){
+        setBattleState((prevState) => {
+          const updatedOpponentMemes = Object.values(prevState.opponentMemes).map((meme) =>
+            meme.id === data.memeId
+              ? { ...meme, health: data.opponentMemeHealth }
+              : meme
+          );
+        
+          const updatedOpponentMemesObject = updatedOpponentMemes.reduce((acc, meme) => {
+            acc[meme.id] = meme;
+            return acc;
+          }, {} as Record<string, MemeState>);
+        
+          return {
+            ...prevState,
+            opponentMemes: updatedOpponentMemesObject,
+          };
+        });
+        
+      } else if (data.status === 'attacked') {
+        setBattleState((prevState) => {
+          const updatedPlayerMemes = Object.values(prevState.playerMemes).map((meme) =>
+            meme.id === data.targetMemeId
+              ? { ...meme, health: data.opponentMemeHealth }
+              : meme
+          );
+          const updatedPlayerMemesObject = updatedPlayerMemes.reduce((acc, meme) => {
+            acc[meme.id] = meme;
+            return acc;
+          }, {} as Record<string, MemeState>);
+          return {
+            ...prevState,
+            playerMemes: updatedPlayerMemesObject,
+          };
+        })
       }
     };
 

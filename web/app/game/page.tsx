@@ -12,7 +12,7 @@ const BattlePage: React.FC = () => {
   const handleAttack = (memeId: string, powerName: string, targetMemeId: string) => {
     attack(memeId, powerName, targetMemeId);
   };
-
+  console.log(battleState.playerMemes)
   return (
     <div>
       <h1>Battle Arena</h1>
@@ -48,7 +48,7 @@ const BattlePage: React.FC = () => {
                         key={power.name}
                         onClick={() => handleAttack(playerMeme.id, power.name, meme.id)}
                       >
-                        {playerMeme.id} uses {power.name} on {meme.id}
+                        {playerMeme.id}  uses {power.name} on {meme.id}
                       </button>
                     ))
                   ))}

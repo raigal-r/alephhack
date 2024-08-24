@@ -26,15 +26,15 @@ export class GameService {
 
   handleAttack(wsConnection: WebSocket, data: any) {
     const { playerId, opponentId, memeId, targetMemeId, powerName } = data;
-    console.log({ playerId, opponentId, memeId, targetMemeId, powerName })
+    console.log({ playerId, opponentId, memeId, targetMemeId, powerName });
     const player = this.playerProvider.getPlayer(playerId);
     const opponent = this.playerProvider.getPlayer(opponentId);
 
     if (player && opponent) {
-      const meme = player.memes.find(m => m.id === targetMemeId);
-      const power = meme?.powers.find(p => p.name === powerName);
+      const playerMeme = player.memes.find(m => m.id === memeId);
+      const power = playerMeme?.powers.find(p => p.name === powerName);
 
-      if (meme && power) {
+      if (playerMeme && power) {
         const damage = power.powerValue * 2; 
         const remainingHealth = this.playerProvider.updateMemeHealth(opponentId, targetMemeId, damage);
 
@@ -43,9 +43,9 @@ export class GameService {
             status: 'attack_successful',
             opponentId,
             memeId,
-            remainingHealth,
-            playerMemeHealth: this.playerProvider.getMemeHealth(playerId, memeId), 
-            opponentMemeHealth: this.playerProvider.getMemeHealth(opponentId, targetMemeId),
+            targetMemeId,
+            playerMemeHealth: playerMeme.health, 
+            opponentMemeHealth: remainingHealth,
           }));
 
           if (opponent.socket.readyState === WebSocket.OPEN) {
@@ -53,10 +53,9 @@ export class GameService {
               status: 'attacked',
               attackerId: playerId,
               memeId,
-              damage,
-              remainingHealth,
-              playerMemeHealth: this.playerProvider.getMemeHealth(playerId, memeId), 
-              opponentMemeHealth: this.playerProvider.getMemeHealth(opponentId, targetMemeId), 
+              targetMemeId,
+              playerMemeHealth: playerMeme.health, 
+              opponentMemeHealth: remainingHealth, 
             }));
           }
 
