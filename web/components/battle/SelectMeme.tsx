@@ -9,10 +9,6 @@ export default function SelectMeme() {
   const { setGameStage } = useGameStage();
   const [selectedMemes, setSelectedMemes] = useState<number[]>([]);
 
-  const handleStakeMeme = useCallback(() => {
-    console.log('staking meme');
-  }, []);
-
   const handleSelectMeme = useCallback((memeId: number) => {
     setSelectedMemes((prevSelected) => {
       if (prevSelected.includes(memeId)) {
@@ -30,7 +26,7 @@ export default function SelectMeme() {
 
   return (
     <div className="flex flex-col items-center justify-between h-full">
-      <Button onClick={handleStakeMeme}>
+      <Button onClick={() => setGameStage('stakeMeme')}>
         <IconPlus />
         Stake meme
       </Button>
