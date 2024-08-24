@@ -8,12 +8,38 @@ body {
 }
 
 .wallet-adapter-button-trigger {
-  background: rgb(100, 26, 230) !important;
-  border-radius: 8px !important;
+  /* background: rgb(100, 26, 230) !important; */
+  @apply !bg-primary;
+  border-radius: 2px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
 }
 .wallet-adapter-dropdown-list,
 .wallet-adapter-button {
   font-family: inherit !important;
+}
+
+.btn,
+.menu,
+.dropdown-content,
+.wallet-adapter-dropdown-list,
+.wallet-adapter-dropdown-list-active,
+.wallet-adapter-modal-wrapper {
+  border-radius: 2px !important;
+}
+/* class="wallet-adapter-dropdown-list wallet-adapter-dropdown-list-active" */
+.menu,
+.dropdown-content,
+.wallet-adapter-dropdown-list,
+.wallet-adapter-dropdown-list-active,
+.wallet-adapter-modal-wrapper {
+  @apply !bg-background;
+}
+
+li a.active, li {
+  border-radius: 2px !important;
+}
+
+.border-radius{
+  border-radius: 2px !important;
 }
