@@ -52,11 +52,10 @@ export function useBattle() {
       } else if (data.status === 'attack_successful'){
         setBattleState((prevState) => {
           const updatedOpponentMemes = Object.values(prevState.opponentMemes).map((meme) =>
-            meme.id === data.memeId
+            meme.id === data.targetMemeId
               ? { ...meme, health: data.opponentMemeHealth }
               : meme
           );
-        
           const updatedOpponentMemesObject = updatedOpponentMemes.reduce((acc, meme) => {
             acc[meme.id] = meme;
             return acc;
