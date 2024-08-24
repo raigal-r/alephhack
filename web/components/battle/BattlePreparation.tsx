@@ -60,7 +60,7 @@ export default function BattlePreparation() {
       </h2>
       <div className="flex items-center justify-between px-2 flex-grow">
         <div className="w-[45%] flex flex-col items-center">
-          <h3 className="text-lg font-bold mb-2">Your team</h3>
+          <h3 className="text-lg font-bold mb-2 text-blue-800">Your team</h3>
           <div className="flex flex-col gap-2 w-full">
             {teamMockedData.map((elem) => (
               <MemeSmallCard key={`${elem.lvl}_${elem.name}`} {...elem} />
@@ -72,7 +72,7 @@ export default function BattlePreparation() {
           <span className="text-xs">VS</span>
         </div>
         <div className="w-[45%] flex flex-col items-center">
-          <h3 className="text-lg font-bold mb-2">Enemy team</h3>
+          <h3 className="text-lg font-bold mb-2 text-red-800">Enemy team</h3>
           <div className="flex flex-col gap-2 w-full">
             {!battleState.battleStarted ? (
               <>
