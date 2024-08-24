@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "fastify": "^4.28.1",
     "pino-pretty": "^11.2.1",
     "ws": "^8.18.0"
   },

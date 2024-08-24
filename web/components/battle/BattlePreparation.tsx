@@ -50,8 +50,8 @@ export default function BattlePreparation() {
   
 
   const handleReady = () => {
-    console.log('Player is ready!');
-    setGameStage("battlePreparation")
+    console.log('Playez is ready!');
+    setGameStage('battle')
   };
 
   return (
@@ -98,7 +98,7 @@ export default function BattlePreparation() {
         <Button
           onClick={handleReady}
           className={`mt-4 ${
-            battleState.battleStarted ? 'opacity-50 cursor-not-allowed' : ''
+            !battleState.battleStarted ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={!battleState.battleStarted}
         >

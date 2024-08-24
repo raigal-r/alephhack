@@ -1,5 +1,6 @@
 import WebSocket from 'ws';
 import { GameService } from '../services/game.service';
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 // Constantes para las acciones
 const JOIN_ACTION = 'join';
@@ -46,4 +47,44 @@ export class GameController {
       console.log('[GameController] Client disconnected');
     });
   }
+  async getPlayerMemes(request: FastifyRequest, reply: FastifyReply) {
+    const availableMemes: any[] = [];
+
+    const baseMemes = [
+      { name: 'PEPE', health: 100, attack: 100, defense: 50, critChance: 0.2, speed: 30 },
+      { name: 'WIF', health: 100, attack: 100, defense: 50, critChance: 0.2, speed: 30 },
+      { name: 'MAGAIBA', health: 100, attack: 100, defense: 50, critChance: 0.2, speed: 30 },
+    ];
+
+    baseMemes.forEach((baseMeme) => {
+      const memePowers: any[] = [
+        { name: 'Smash', powerValue: 10 },
+        { name: 'Splash', powerValue: 20 },
+        { name: 'Blast', powerValue: 30 },
+        { name: 'Zap', powerValue: 40 },
+      ];
+
+      const meme: any = {
+        id: baseMeme.name,
+        name: baseMeme.name,
+        health: baseMeme.health,
+        attack: baseMeme.attack,
+        defense: baseMeme.defense,
+        critChance: baseMeme.critChance,
+        speed: baseMeme.speed,
+        powers: memePowers,
+      };
+
+      availableMemes.push(meme);
+    });
+    if (availableMemes) {
+      return reply.send(availableMemes);
+    } else {
+      return reply.status(404).send({ error: 'Player not found or no memes assigned' });
+    }
+  }
+  registerRoutes(fastify: FastifyInstance) {
+    fastify.get('/meme', this.getPlayerMemes.bind(this));
+  }
+
 }

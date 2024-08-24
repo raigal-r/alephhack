@@ -14,7 +14,7 @@ const BattlePage: React.FC = () => {
       {gameStage === 'selectMeme' && <SelectMeme />}
       {gameStage === 'stakeMeme' && <StakeMeme />}
       {gameStage === 'battlePreparation' && <BattlePreparation />}
-      {/* {gameStage === 'battle' && <MainBattle />} */}
+      {gameStage === 'battle' && <MainBattle />}
     </section>
   );
 };
