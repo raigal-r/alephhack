@@ -9,6 +9,7 @@ export default function SelectMeme() {
   const handleStakeMeme = () => {
     console.log('staking meme');
   };
+
   return (
     <div className="flex flex-col items-center gap-4 justify-between h-full">
       <Button onClick={() => handleStakeMeme()}>
