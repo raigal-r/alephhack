@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function MemeSmallCard({ lvl, name, img }: MemeData) {
   return (
-    <div className="flex flex-col items-center justify-center border border-black rounded p-2">
+    <div className="flex flex-col items-center justify-center border-black border-2 rounded p-2">
       <div className="flex gap-2 ">
         <h4 className="text-xl">{name}</h4>
         <p className="m-0">Lvl: {lvl}</p>

@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html className="bg-white" lang="en">
+      <body >
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>
