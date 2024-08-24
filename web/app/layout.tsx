@@ -3,6 +3,7 @@ import { UiLayout } from '@/components/ui/ui-layout';
 import { ClusterProvider } from '@/components/cluster/cluster-data-access';
 import { SolanaProvider } from '@/components/solana/solana-provider';
 import { ReactQueryProvider } from './react-query-provider';
+import { GameStageProvider } from '@/components/providers/GameStageProvider';
 
 export const metadata = {
   title: 'Meme Wars',
@@ -28,7 +29,9 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>
-              <UiLayout links={links}>{children}</UiLayout>
+              <GameStageProvider>
+                <UiLayout links={links}>{children}</UiLayout>
+              </GameStageProvider>
             </SolanaProvider>
           </ClusterProvider>
         </ReactQueryProvider>

@@ -1,6 +1,6 @@
+import Button from '@/components/ui/Button';
 import { IconPlayerPlayFilled } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function page() {
@@ -29,9 +29,9 @@ export default function page() {
         <div className="flex flex-col justify-end h-full flex-grow">
           <div className="w-full flex items-center">
             <Link href={'/game'} className="mx-auto w-full">
-              <button className="btn btn-black text-white max-w-xs text-lg mx-auto w-full">
+              <Button>
                 <IconPlayerPlayFilled /> Start Game
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
