@@ -28,6 +28,9 @@ export default function page() {
         </button> */}
         <div className="flex flex-col justify-end h-full flex-grow">
           <div className="w-full flex items-center">
+            <Button>
+                <IconPlayerPlayFilled /> Start Game
+            </Button>
             <Link href={'/game'} className="mx-auto w-full">
               <Button>
                 <IconPlayerPlayFilled /> Start Game

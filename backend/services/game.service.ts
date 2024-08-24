@@ -75,6 +75,13 @@ export class GameService {
       }
     }
   }
+  getPlayerMemes(playerId: string) {
+    const player = this.playerProvider.getPlayer(playerId);
+    if (player) {
+      return player.memes;
+    }
+    return null;
+  }
 
   private startGameIfReady() {
     const players = this.playerProvider.getPlayers();
@@ -98,5 +105,7 @@ export class GameService {
     } else {
       console.log('[GameService] Not enough players to start the game');
     }
+
+    
   }
 }

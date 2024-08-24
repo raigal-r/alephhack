@@ -1,0 +1,9 @@
+### Probar el Endpoint GET /meme?playerId=1
+
+# Asegúrate de que el servidor esté en ejecución antes de realizar las pruebas.
+
+# 1. Probar obtener los memes del jugador con playerId=1
+GET http://localhost:3001/meme?playerId=34
+Content-Type: application/json
+
+
