@@ -34,7 +34,7 @@ export default function NavBar({ links }: Props) {
               setIsDrawerOpen((prevIsOpenState) => !prevIsOpenState);
             }}
           >
-            <IconMenu2 className="h-1/2" />
+            <IconMenu2 className="h-1/2 fill-black text-black" />
           </label>
           {isDrawerOpen && (
             <ul
@@ -63,7 +63,7 @@ export default function NavBar({ links }: Props) {
         >
           Home
         </Link>
-        <ul className="hidden lg:flex menu menu-horizontal px-1 ">
+        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 ">
           {links.map(({ label, path }) => (
             <li key={path}>
               <Link

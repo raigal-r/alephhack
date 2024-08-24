@@ -12,31 +12,30 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['VT323', 'DotGothic16', 'sans-serif'],
+      },
       colors: {
         primary: {
-          light: '#93C5FD', // A lighter blue for dark mode
-          DEFAULT: '#3B82F6', // A vibrant blue as the main primary color
-          dark: '#1D4ED8', // A darker blue for contrast
+          DEFAULT: '#000000', // Black for primary text and UI elements
         },
         secondary: {
-          light: '#A78BFA', // A lighter purple for dark mode
-          DEFAULT: '#8B5CF6', // A vibrant purple as the main secondary color
-          dark: '#6D28D9', // A darker purple for contrast
+          DEFAULT: '#FFFFFF', // White for secondary elements
         },
         background: {
-          light: '#1F2937', // Slightly lighter dark background
-          DEFAULT: '#111827', // Main dark background
-          dark: '#030712', // Very dark background for contrast
+          DEFAULT: '#FFFFFF', // White for main background
         },
         text: {
-          light: '#F9FAFB', // Very light text for dark mode
-          DEFAULT: '#D1D5DB', // Default text color for dark mode
-          dark: '#6B7280', // Subdued text color for dark mode
+          DEFAULT: '#000000', // Black for most text
         },
         accent: {
-          light: '#34D399', // A lighter green for accents
-          DEFAULT: '#10B981', // A vibrant green for accents
-          dark: '#059669', // A darker green for contrast
+          green: '#4CAF50', // Green for Pepe meme images
+          yellow: '#FFF59D', // Light yellow for some card backgrounds
+          pink: '#FFCCCB', // Light pink for some card backgrounds
+        },
+        button: {
+          DEFAULT: '#000000', // Black for button backgrounds
+          text: '#FFFFFF', // White for button text
         },
       },
     },

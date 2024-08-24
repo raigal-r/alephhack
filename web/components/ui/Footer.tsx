@@ -3,9 +3,8 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="footer footer-center p-4 bg-background text-base-content">
-      <div className="w-full">
-        <ul className="menu menu-horizontal w-full">
+    <footer className="footer footer-center p-2 lg:p-4 bg-background text-base-content">
+        <ul className=" w-full">
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="flex justify-center items-center gap-2">
               <p className="m-0 text-center">
@@ -15,7 +14,6 @@ export default function Footer() {
             </div>
           </div>
         </ul>
-      </div>
     </footer>
   );
 }
