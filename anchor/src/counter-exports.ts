@@ -19,6 +19,8 @@ export function getCounterProgram(provider: AnchorProvider) {
 export function getCounterProgramId(cluster: Cluster) {
   switch (cluster) {
     case 'devnet':
+      // This is the program ID for the Counter program on devnet and testnet.
+      return new PublicKey('CounNZdmsQmWh7uVngV9FXW2dZ6zAgbJyYsvBpqbykg');
     case 'testnet':
       // This is the program ID for the Counter program on devnet and testnet.
       return new PublicKey('CounNZdmsQmWh7uVngV9FXW2dZ6zAgbJyYsvBpqbykg');

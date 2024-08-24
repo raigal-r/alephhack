@@ -16,12 +16,12 @@ export function UiLayout({
   links: { label: string; path: string }[];
 }) {
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-background">
       <NavBar links={links} />
       <ClusterChecker>
         <AccountChecker />
       </ClusterChecker>
-      <div className="flex-grow mx-4 lg:mx-auto">
+      <main className="flex-grow mx-4 lg:mx-auto ">
         <Suspense
           fallback={
             <div className="text-center my-32">
@@ -32,7 +32,7 @@ export function UiLayout({
           {children}
         </Suspense>
         <Toaster position="bottom-right" />
-      </div>
+      </main>
       <Footer />
     </div>
   );
