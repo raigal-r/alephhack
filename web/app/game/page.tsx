@@ -12,7 +12,6 @@ const BattlePage: React.FC = () => {
   const handleAttack = (memeId: string, powerName: string, targetMemeId: string) => {
     attack(memeId, powerName, targetMemeId);
   };
-  console.log(battleState.playerMemes)
   return (
     <div>
       <h1>Battle Arena</h1>

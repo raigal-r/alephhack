@@ -40,6 +40,7 @@ export function useBattle() {
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
       console.log({data})
+      console.log(data.status)
       
       if (data.status === 'battle_started') {
         setBattleState({
@@ -83,6 +84,9 @@ export function useBattle() {
             playerMemes: updatedPlayerMemesObject,
           };
         })
+      } else if(data.status === 'battle_ended'){
+        console.log('FIN GANASTE!')
+        console.log(data.winnerId)
       }
     };
 
