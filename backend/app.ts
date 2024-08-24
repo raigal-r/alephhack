@@ -19,3 +19,4 @@ export function startServer(): Server {
 
   return server;
 }
+startServer()

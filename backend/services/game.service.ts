@@ -1,4 +1,3 @@
-// /src/services/game.service.ts
 import WebSocket from 'ws';
 import { PlayerProvider } from '../providers/player.provider';
 import { BattleProvider } from '../providers/battle.provider';
@@ -26,17 +25,18 @@ export class GameService {
   }
 
   handleAttack(wsConnection: WebSocket, data: any) {
-    const { playerId, opponentId, memeId, powerName } = data;
+    const { playerId, opponentId, memeId, targetMemeId, powerName } = data;
+    console.log({ playerId, opponentId, memeId, targetMemeId, powerName })
     const player = this.playerProvider.getPlayer(playerId);
     const opponent = this.playerProvider.getPlayer(opponentId);
 
     if (player && opponent) {
-      const meme = player.memes.find(m => m.id === memeId);
+      const meme = player.memes.find(m => m.id === targetMemeId);
       const power = meme?.powers.find(p => p.name === powerName);
 
       if (meme && power) {
-        const damage = power.powerValue * 2; // Ecuación simple
-        const remainingHealth = this.playerProvider.updateMemeHealth(opponentId, memeId, damage);
+        const damage = power.powerValue * 2; 
+        const remainingHealth = this.playerProvider.updateMemeHealth(opponentId, targetMemeId, damage);
 
         if (remainingHealth !== null) {
           wsConnection.send(JSON.stringify({
@@ -44,6 +44,8 @@ export class GameService {
             opponentId,
             memeId,
             remainingHealth,
+            playerMemeHealth: this.playerProvider.getMemeHealth(playerId, memeId), 
+            opponentMemeHealth: this.playerProvider.getMemeHealth(opponentId, targetMemeId),
           }));
 
           if (opponent.socket.readyState === WebSocket.OPEN) {
@@ -53,10 +55,11 @@ export class GameService {
               memeId,
               damage,
               remainingHealth,
+              playerMemeHealth: this.playerProvider.getMemeHealth(playerId, memeId), 
+              opponentMemeHealth: this.playerProvider.getMemeHealth(opponentId, targetMemeId), 
             }));
           }
 
-          // Verificar si todos los memes del oponente han sido derrotados
           if (this.playerProvider.areAllMemesDefeated(opponentId)) {
             const battle = this.battleProvider.getActiveBattle();
             if (battle) {
@@ -75,14 +78,24 @@ export class GameService {
   }
 
   private startGameIfReady() {
-    const players = Object.values(this.playerProvider.getPlayerCount());
-    if (players.length >= 2) {
-      const player1 = players[0];
-      const player2 = players[1];
+    const players = this.playerProvider.getPlayers();
+    if (Object.keys(players).length >= 2) {
+      const player1 = players[Object.keys(players)[0]];
+      const player2 = players[Object.keys(players)[1]];
       this.battleProvider.createBattle(player1, player2);
 
-      player1.socket.send(JSON.stringify({ status: 'battle_started', opponentId: player2.id }));
-      player2.socket.send(JSON.stringify({ status: 'battle_started', opponentId: player1.id }));
+      player1.socket.send(JSON.stringify({
+        status: 'battle_started',
+        opponentId: player2.id,
+        playerMemes: player1.memes,
+        opponentMemes: player2.memes
+      }));
+      player2.socket.send(JSON.stringify({
+        status: 'battle_started',
+        opponentId: player1.id,
+        playerMemes: player2.memes,
+        opponentMemes: player1.memes
+      }));
     } else {
       console.log('[GameService] Not enough players to start the game');
     }
