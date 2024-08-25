@@ -26,7 +26,7 @@ export function useBattle() {
 
   useEffect(() => {
     // Genera el playerId solo en el cliente después del montaje
-    setPlayerId((Math.floor(Math.random() * 100)).toString());
+    setPlayerId(Math.floor(Math.random() * 100).toString());
   }, []);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export function useBattle() {
 
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
-      console.log({data})
+      console.log({ data });
 
       if (data.status === 'battle_started') {
         setBattleState({
@@ -48,43 +48,51 @@ export function useBattle() {
           playerMemes: data.playerMemes,
           opponentMemes: data.opponentMemes,
         });
-      } else if (data.status === 'attack_successful'){
+      } else if (data.status === 'attack_successful') {
         setBattleState((prevState) => {
-          const updatedOpponentMemes = Object.values(prevState.opponentMemes).map((meme) =>
+          const updatedOpponentMemes = Object.values(
+            prevState.opponentMemes
+          ).map((meme) =>
             meme.id === data.targetMemeId
               ? { ...meme, health: data.opponentMemeHealth }
               : meme
           );
-          const updatedOpponentMemesObject = updatedOpponentMemes.reduce((acc, meme) => {
-            acc[meme.id] = meme;
-            return acc;
-          }, {} as Record<string, MemeState>);
+          const updatedOpponentMemesObject = updatedOpponentMemes.reduce(
+            (acc, meme) => {
+              acc[meme.id] = meme;
+              return acc;
+            },
+            {} as Record<string, MemeState>
+          );
 
           return {
             ...prevState,
             opponentMemes: updatedOpponentMemesObject,
           };
         });
-
       } else if (data.status === 'attacked') {
         setBattleState((prevState) => {
-          const updatedPlayerMemes = Object.values(prevState.playerMemes).map((meme) =>
-            meme.id === data.targetMemeId
-              ? { ...meme, health: data.opponentMemeHealth }
-              : meme
+          const updatedPlayerMemes = Object.values(prevState.playerMemes).map(
+            (meme) =>
+              meme.id === data.targetMemeId
+                ? { ...meme, health: data.opponentMemeHealth }
+                : meme
           );
-          const updatedPlayerMemesObject = updatedPlayerMemes.reduce((acc, meme) => {
-            acc[meme.id] = meme;
-            return acc;
-          }, {} as Record<string, MemeState>);
+          const updatedPlayerMemesObject = updatedPlayerMemes.reduce(
+            (acc, meme) => {
+              acc[meme.id] = meme;
+              return acc;
+            },
+            {} as Record<string, MemeState>
+          );
           return {
             ...prevState,
             playerMemes: updatedPlayerMemesObject,
           };
-        })
-      } else if(data.status === 'battle_ended'){
-        console.log('FIN GANASTE!')
-        console.log(data.winnerId)
+        });
+      } else if (data.status === 'battle_ended') {
+        console.log('FIN GANASTE!');
+        console.log(data.winnerId);
       }
     };
 
@@ -108,19 +116,27 @@ export function useBattle() {
     }
   }, [ws, playerId]);
 
-  const attack = useCallback((memeId: string, powerName: string, targetMemeId: string) => {
-    if (ws && ws.readyState === WebSocket.OPEN && battleState.opponentId && playerId) {
-      const attackPayload = {
-        action: 'attack',
-        playerId,
-        opponentId: battleState.opponentId,
-        memeId,
-        targetMemeId,
-        powerName
-      };
-      ws.send(JSON.stringify(attackPayload));
-    }
-  }, [ws, battleState.opponentId, playerId]);
+  const attack = useCallback(
+    (memeId: string, powerDamage: number, targetMemeId: string) => {
+      if (
+        ws &&
+        ws.readyState === WebSocket.OPEN &&
+        battleState.opponentId &&
+        playerId
+      ) {
+        const attackPayload = {
+          action: 'attack',
+          playerId,
+          opponentId: battleState.opponentId,
+          memeId,
+          targetMemeId,
+          powerDamage,
+        };
+        ws.send(JSON.stringify(attackPayload));
+      }
+    },
+    [ws, battleState.opponentId, playerId]
+  );
 
   return {
     battleState,

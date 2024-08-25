@@ -56,7 +56,7 @@ interface PlayerCardProps {
   currentHealth: number;
   totalHealth: number;
   imageSrc: string;
-  stats: { attack: number; critical: number; speed: number; defense: number };
+  stats: { attack: number; critChance: number; speed: number; defense: number };
   isEnemy?: boolean;
 }
 
@@ -83,7 +83,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
     </div>
     <div className="grid grid-cols-2 gap-2 mt-4 max-w-[150px] mx-auto">
       <StatDisplay Icon={IconSword} value={stats.attack} />
-      <StatDisplay Icon={IconSparkles} value={`${stats.critical}%`} />
+      <StatDisplay Icon={IconSparkles} value={`${stats.critChance}%`} />
       <StatDisplay Icon={IconShoe} value={stats.speed} />
       <StatDisplay Icon={IconShield} value={stats.defense} />
     </div>
@@ -116,9 +116,12 @@ export default function MainBattle() {
   const [p1Meme, setP1Meme] = useState<Meme>(
     memes.find((meme) => meme.name === 'WIF')!
   );
-  const [p2Meme, setP2Meme] = useState<Meme>(
-    memes.find((meme) => meme.name === 'MAGAIBA')!
-  );
+  const [p2Meme, setP2Meme] = useState<Meme>();
+
+  useEffect(() => {
+    console.log(battleState.opponentMemes[0]);
+    setP2Meme(battleState?.opponentMemes[0] as Meme);
+  }, [battleState.opponentMemes]);
 
   useEffect(() => {
     joinBattle();
@@ -126,14 +129,14 @@ export default function MainBattle() {
 
   const handleAttack = (
     memeId: string,
-    powerDamage: string,
+    powerDamage: number,
     targetMemeId: string
   ) => {
-    console.log('atk: ');
+    console.log(memeId, powerDamage, targetMemeId);
     attack(memeId, powerDamage, targetMemeId);
   };
 
-  const moves = [
+  const powers = [
     { name: 'Home run hit', src: '/images/cards/bonk-cards/home-run-hit.png' },
     { name: 'Golden bat', src: '/images/cards/bonk-cards/golden-bat.png' },
     {
@@ -156,13 +159,13 @@ export default function MainBattle() {
         {p1Meme && (
           <PlayerCard
             name="You"
-            level={p1Meme.level}
+            level={p1Meme?.level ?? 0}
             currentHealth={100} // Replace with actual current health value
             totalHealth={p1Meme.health}
-            imageSrc="/images/pets/pet-bonk.png"
+            imageSrc={p1Meme?.imageSrc ?? ""}
             stats={{
               attack: p1Meme.attack,
-              critical: p1Meme.critical / 100,
+              critChance: p1Meme.critChance / 100,
               speed: p1Meme.speed,
               defense: p1Meme.defense,
             }}
@@ -171,13 +174,13 @@ export default function MainBattle() {
         {p2Meme && (
           <PlayerCard
             name="Enemy"
-            level={p2Meme.level}
+            level={p2Meme?.level ?? 0}
             currentHealth={200} // Replace with actual current health value
             totalHealth={p2Meme.health}
-            imageSrc="/images/pets/pet-magaiba.png"
+            imageSrc={p2Meme?.imageSrc ?? ""}
             stats={{
               attack: p2Meme.attack,
-              critical: p2Meme.critical / 100,
+              critChance: p2Meme.critChance / 100,
               speed: p2Meme.speed,
               defense: p2Meme.defense,
             }}
@@ -190,16 +193,16 @@ export default function MainBattle() {
 
       <div className="w-full">
         <div className="pt-4 flex flex-wrap justify-center gap-4 px-2">
-          {moves.map((move) => (
+          {p1Meme?.powers.map((power) => (
             <div
               className="mx-auto flex items-center justify-center"
-              key={move.name}
+              key={power.name}
             >
               <MoveCard
-                imageSrc={move.src}
-                name={move.name}
+                imageSrc={power?.src ?? ''}
+                name={power.name}
                 onClick={() =>
-                  handleAttack('player-meme-id', move.name, 'enemy-meme-id')
+                  handleAttack(p1Meme.id, power.powerValue, p2Meme?.id ?? '')
                 }
               />
             </div>
