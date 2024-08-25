@@ -40,8 +40,7 @@ export function useBattle() {
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
       console.log({data})
-      console.log(data.status)
-      
+
       if (data.status === 'battle_started') {
         setBattleState({
           battleStarted: true,
@@ -60,13 +59,13 @@ export function useBattle() {
             acc[meme.id] = meme;
             return acc;
           }, {} as Record<string, MemeState>);
-        
+
           return {
             ...prevState,
             opponentMemes: updatedOpponentMemesObject,
           };
         });
-        
+
       } else if (data.status === 'attacked') {
         setBattleState((prevState) => {
           const updatedPlayerMemes = Object.values(prevState.playerMemes).map((meme) =>

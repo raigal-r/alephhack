@@ -9,6 +9,7 @@ export type Meme = {
   speed: number;
   defense: number;
   balance: number;
+  powers: { name: string; powerValue: number }[];
 };
 
 export const memes: Meme[] = [
@@ -23,6 +24,24 @@ export const memes: Meme[] = [
     speed: 200,
     defense: 57,
     balance: 0,
+    powers: [
+      {
+        name: 'Smash',
+        powerValue: 5,
+      },
+      {
+        name: 'Splash',
+        powerValue: 20,
+      },
+      {
+        name: 'Blast',
+        powerValue: 40,
+      },
+      {
+        name: 'Zap',
+        powerValue: 30,
+      },
+    ],
   },
   {
     id: 2,
@@ -35,6 +54,24 @@ export const memes: Meme[] = [
     speed: 400,
     defense: 80,
     balance: 0,
+    powers: [
+      {
+        name: 'Smash',
+        powerValue: 10,
+      },
+      {
+        name: 'Splash',
+        powerValue: 15,
+      },
+      {
+        name: 'Blast',
+        powerValue: 20,
+      },
+      {
+        name: 'Zap',
+        powerValue: 50,
+      },
+    ],
   },
   {
     id: 3,
@@ -47,6 +84,24 @@ export const memes: Meme[] = [
     speed: 600,
     defense: 120,
     balance: 0,
+    powers: [
+      {
+        name: 'Smash',
+        powerValue: 10,
+      },
+      {
+        name: 'Splash',
+        powerValue: 40,
+      },
+      {
+        name: 'Blast',
+        powerValue: 5,
+      },
+      {
+        name: 'Zap',
+        powerValue: 10,
+      },
+    ],
   },
   {
     id: 4,
@@ -59,6 +114,24 @@ export const memes: Meme[] = [
     speed: 300,
     defense: 14,
     balance: 0,
+    powers: [
+      {
+        name: 'Smash',
+        powerValue: 10,
+      },
+      {
+        name: 'Splash',
+        powerValue: 20,
+      },
+      {
+        name: 'Blast',
+        powerValue: 30,
+      },
+      {
+        name: 'Zap',
+        powerValue: 40,
+      },
+    ],
   },
   {
     id: 5,
@@ -71,5 +144,23 @@ export const memes: Meme[] = [
     speed: 200,
     defense: 24,
     balance: 0,
+    powers: [
+      {
+        name: 'Smash',
+        powerValue: 10,
+      },
+      {
+        name: 'Splash',
+        powerValue: 20,
+      },
+      {
+        name: 'Blast',
+        powerValue: 30,
+      },
+      {
+        name: 'Zap',
+        powerValue: 40,
+      },
+    ],
   },
 ];
