@@ -6,8 +6,8 @@ import { ReactQueryProvider } from './react-query-provider';
 import { GameStageProvider } from '@/components/providers/GameStageProvider';
 
 export const metadata = {
-  title: 'Meme Wars',
-  description: 'Degen vs Regen',
+  title: 'Meme Arena',
+  description: 'PvP On-chain Meme coin arena',
 };
 
 const links: { label: string; path: string }[] = [
@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html className="bg-white" lang="en">
-      <body >
+      <body>
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>

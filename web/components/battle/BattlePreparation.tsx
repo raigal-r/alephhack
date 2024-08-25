@@ -5,30 +5,7 @@ import SkeletonMemeCard from '../ui/SkeletonMemeCard';
 import Button from '../ui/Button';
 import { useGameStage } from '../providers/GameStageProvider';
 import { useBattle } from '@/hooks/useBattle';
-
-export interface MemeData {
-  lvl: number;
-  name: string;
-  img: string;
-}
-const teamMockedData: MemeData[] = [
-  {
-    lvl: 31,
-    name: 'BONK',
-    img: '/BONK_profile.png',
-  },
-  {
-    lvl: 88,
-    name: 'WIF',
-    img: '/WIF_profile.png',
-  },
-  {
-    lvl: 52,
-    name: 'MAGAIBA',
-    img: '/MAGAIBA_profile.png',
-  },
-];
-console.log({ teamMockedData });
+import { memes } from '@/mockData/mockData';
 
 export default function BattlePreparation() {
   const [isBattleFound, setIsBattleFound] = useState(false);
@@ -52,7 +29,7 @@ export default function BattlePreparation() {
     console.log('Battle begins!');
     setGameStage('battle');
   };
-
+  const cutMemes = memes.slice(0, 3);
   return (
     <div className="flex flex-col h-full">
       <h2 className="title text-center my-4">
@@ -62,8 +39,8 @@ export default function BattlePreparation() {
         <div className="w-[45%] flex flex-col items-center">
           <h3 className="text-lg font-bold mb-2 text-blue-800">Your team</h3>
           <div className="flex flex-col gap-2 w-full">
-            {teamMockedData.map((elem) => (
-              <MemeSmallCard key={`${elem.lvl}_${elem.name}`} {...elem} />
+            {cutMemes.map((elem) => (
+              <MemeSmallCard key={`${elem.level}_${elem.name}`} {...elem} />
             ))}
           </div>
         </div>
@@ -81,16 +58,15 @@ export default function BattlePreparation() {
                 <SkeletonMemeCard />
               </>
             ) : (
-              teamMockedData.map((elem) => (
-                <MemeSmallCard
-                  key={`enemy_${elem.lvl}_${elem.name}`}
-                  {...elem}
-                />
-              ))
+              cutMemes
+                .reverse()
+                .map((elem) => (
+                  <MemeSmallCard
+                    key={`enemy_${elem.level}_${elem.name}`}
+                    {...elem}
+                  />
+                ))
             )}
-            {/* // ) : (
-            //   <p className="text-center text-sm">No opponent found</p>
-            // )} */}
           </div>
         </div>
       </div>
