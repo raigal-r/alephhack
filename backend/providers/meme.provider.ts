@@ -40,33 +40,7 @@ export const memes: Meme[] = [
       },
     ],
   },
-  {
-    id: 'WIF',
-    name: 'WIF',
-    health: 400,
-    attack: 594,
-    critChance: 594,
-    speed: 400,
-    defense: 80,
-    powers: [
-      {
-        name: 'Smash',
-        powerValue: 10,
-      },
-      {
-        name: 'Splash',
-        powerValue: 15,
-      },
-      {
-        name: 'Blast',
-        powerValue: 20,
-      },
-      {
-        name: 'Zap',
-        powerValue: 50,
-      },
-    ],
-  },
+
   {
     id: 'MOG',
     name: 'MOG',
@@ -102,33 +76,6 @@ export const memes: Meme[] = [
     critChance: 300,
     speed: 300,
     defense: 14,
-    powers: [
-      {
-        name: 'Smash',
-        powerValue: 10,
-      },
-      {
-        name: 'Splash',
-        powerValue: 20,
-      },
-      {
-        name: 'Blast',
-        powerValue: 30,
-      },
-      {
-        name: 'Zap',
-        powerValue: 40,
-      },
-    ],
-  },
-  {
-    id: 'BOBO',
-    name: 'BOBO',
-    health: 594,
-    attack: 34,
-    critChance: 100,
-    speed: 200,
-    defense: 24,
     powers: [
       {
         name: 'Smash',

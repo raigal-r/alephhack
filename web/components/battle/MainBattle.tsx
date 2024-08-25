@@ -16,7 +16,7 @@ interface StatDisplayProps {
 }
 
 const StatDisplay: React.FC<StatDisplayProps> = ({ Icon, value }) => (
-  <div className="flex items-center justify-between">
+  <div className="flex items-center justify-center">
     <Icon className="w-5 h-5" />
     <span className="ml-1">{value}</span>
   </div>
@@ -35,7 +35,7 @@ const HealthBar: React.FC<HealthBarProps> = ({
     0,
     Math.min(100, (currentHealth / totalHealth) * 100)
   );
-
+console.log(currentHealth, totalHealth)
   return (
     <div className="flex w-full items-center bg-gray-300 h-5 rounded-[2px] overflow-hidden">
       <div
@@ -112,16 +112,31 @@ const MoveCard: React.FC<MoveCardProps> = ({ imageSrc, name, onClick }) => (
 
 export default function MainBattle() {
   const { battleState, joinBattle, attack, playerId } = useBattle();
-  console.log(battleState);
-  const [p1Meme, setP1Meme] = useState<Meme>(
-    memes.find((meme) => meme.name === 'WIF')!
-  );
+
+  const [p1Meme, setP1Meme] = useState<Meme>();
   const [p2Meme, setP2Meme] = useState<Meme>();
 
+  console.log(battleState);
+  console.log(p1Meme, p2Meme);
+
   useEffect(() => {
-    console.log(battleState.opponentMemes[0]);
-    setP2Meme(battleState?.opponentMemes[0] as Meme);
-  }, [battleState.opponentMemes]);
+    if (battleState?.playerMemes[0]) {
+      const appMemes = Object.values(battleState?.playerMemes) as Meme[];
+      const localMemes = memes;
+
+      const localMeme = localMemes.find((meme) => meme.id === 'BONK')!;
+      const appMeme = appMemes.find((meme) => meme.id === 'BONK')!;
+
+      setP1Meme({ ...localMeme, health: appMeme.health });
+    }
+
+    if (battleState?.opponentMemes[0]) {
+      const localMeme = memes.find(
+        (meme) => meme.id === battleState?.opponentMemes[0].id
+      );
+      setP2Meme({ ...localMeme, ...(battleState?.opponentMemes[0] as Meme) });
+    }
+  }, [battleState.opponentMemes, battleState.playerMemes]);
 
   useEffect(() => {
     joinBattle();
@@ -136,15 +151,15 @@ export default function MainBattle() {
     attack(memeId, powerDamage, targetMemeId);
   };
 
-  const powers = [
-    { name: 'Home run hit', src: '/images/cards/bonk-cards/home-run-hit.png' },
-    { name: 'Golden bat', src: '/images/cards/bonk-cards/golden-bat.png' },
-    {
-      name: 'Running attack',
-      src: '/images/cards/bonk-cards/running-attack.png',
-    },
-    { name: 'Bat block', src: '/images/cards/bonk-cards/bat-block.png' },
-  ];
+  // const powers = [
+  //   { name: 'Home run hit', src: '/images/cards/bonk-cards/home-run-hit.png' },
+  //   { name: 'Golden bat', src: '/images/cards/bonk-cards/golden-bat.png' },
+  //   {
+  //     name: 'Running attack',
+  //     src: '/images/cards/bonk-cards/running-attack.png',
+  //   },
+  //   { name: 'Bat block', src: '/images/cards/bonk-cards/bat-block.png' },
+  // ];
 
   return (
     <div className="p-2">
@@ -160,9 +175,9 @@ export default function MainBattle() {
           <PlayerCard
             name="You"
             level={p1Meme?.level ?? 0}
-            currentHealth={100} // Replace with actual current health value
+            currentHealth={battleState?.playerMemes[0]?.health} // Replace with actual current health value
             totalHealth={p1Meme.health}
-            imageSrc={p1Meme?.imageSrc ?? ""}
+            imageSrc={p1Meme?.imageSrc ?? ''}
             stats={{
               attack: p1Meme.attack,
               critChance: p1Meme.critChance / 100,
@@ -175,9 +190,9 @@ export default function MainBattle() {
           <PlayerCard
             name="Enemy"
             level={p2Meme?.level ?? 0}
-            currentHealth={200} // Replace with actual current health value
+            currentHealth={battleState?.opponentMemes[0]?.health} // Replace with actual current health value
             totalHealth={p2Meme.health}
-            imageSrc={p2Meme?.imageSrc ?? ""}
+            imageSrc={p2Meme?.imageSrc ?? ''}
             stats={{
               attack: p2Meme.attack,
               critChance: p2Meme.critChance / 100,

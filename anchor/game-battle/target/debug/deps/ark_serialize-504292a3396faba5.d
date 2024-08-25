@@ -1,0 +1,11 @@
+/Users/raigal/tmp/Hackathons/AlephHack/alephhack/game-battle/target/debug/deps/libark_serialize-504292a3396faba5.rmeta: /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/lib.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/error.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/flags.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/impls.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/../README.md
+
+/Users/raigal/tmp/Hackathons/AlephHack/alephhack/game-battle/target/debug/deps/libark_serialize-504292a3396faba5.rlib: /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/lib.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/error.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/flags.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/impls.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/../README.md
+
+/Users/raigal/tmp/Hackathons/AlephHack/alephhack/game-battle/target/debug/deps/ark_serialize-504292a3396faba5.d: /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/lib.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/error.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/flags.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/impls.rs /Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/../README.md
+
+/Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/lib.rs:
+/Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/error.rs:
+/Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/flags.rs:
+/Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/impls.rs:
+/Users/raigal/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ark-serialize-0.4.2/src/../README.md:
