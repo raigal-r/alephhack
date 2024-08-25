@@ -25,18 +25,16 @@ export class GameService {
   }
 
   handleAttack(wsConnection: WebSocket, data: any) {
-    const { playerId, opponentId, memeId, targetMemeId, powerName } = data;
-    console.log({ playerId, opponentId, memeId, targetMemeId, powerName });
+    const { playerId, opponentId, memeId, targetMemeId, powerDamage } = data;
+    console.log({ playerId, opponentId, memeId, targetMemeId, powerDamage });
     const player = this.playerProvider.getPlayer(playerId);
     const opponent = this.playerProvider.getPlayer(opponentId);
 
     if (player && opponent) {
       const playerMeme = player.memes.find(m => m.id === memeId);
-      const power = playerMeme?.powers.find(p => p.name === powerName);
 
-      if (playerMeme && power) {
-        const damage = power.powerValue * 2; 
-        const remainingHealth = this.playerProvider.updateMemeHealth(opponentId, targetMemeId, damage);
+      if (playerMeme && powerDamage) {
+        const remainingHealth = this.playerProvider.updateMemeHealth(opponentId, targetMemeId, powerDamage);
 
         if (remainingHealth !== null) {
           wsConnection.send(JSON.stringify({
