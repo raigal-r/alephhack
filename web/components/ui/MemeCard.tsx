@@ -33,7 +33,10 @@ export default function MemeCard({
         <Image src={meme.imageSrc} width={95} height={95} alt={meme.name} />
       </div>
       <div>
-        <div className="pb-2">LVL {meme.level}</div>
+        <div className='flex gap-6'>
+          <div className="pb-2">LVL {meme.level}</div>
+          <div className="pb-2">Balamce {meme.balance}</div>
+        </div>
         <div className="flex flex-wrap gap-4">
           {[
             { Icon: IconApple, value: meme.health },

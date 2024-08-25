@@ -1,15 +1,32 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Button from '../ui/Button';
-import { Meme, memes } from '@/mockData/mockData';
+import { Meme, memes as initialMemes } from '@/mockData/mockData';
 import MemeCoinCard from '../ui/MemeCoinCard';
 import { useGameStage } from '../providers/GameStageProvider';
 import Image from 'next/image';
 import { IconArrowBackUp } from '@tabler/icons-react';
+import { useGetTokenBalances } from '../../hooks/useBalances';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export default function StakeMeme() {
   const { setGameStage } = useGameStage();
   const [selectedMeme, setSelectedMeme] = useState<Meme | undefined>(undefined);
   const [stakeAmount, setStakeAmount] = useState<number | null>(null);
+  const [memes, setMemes] = useState<Meme[]>(initialMemes);
+  const wallet = useWallet();
+  const { data: tokenBalances } = useGetTokenBalances({ address: wallet.publicKey! });
+
+
+  useEffect(() => {
+    if (tokenBalances && tokenBalances.length > 0) {
+      setMemes(prevMemes =>
+        prevMemes.map((meme, index) => ({
+          ...meme,
+          balance: tokenBalances[index % tokenBalances.length].balance
+        }))
+      );
+    }
+  }, [tokenBalances, memes]);
 
   const handleStake = useCallback(() => {
     if (selectedMeme && stakeAmount !== null) {
@@ -40,6 +57,7 @@ export default function StakeMeme() {
     },
     [selectedMeme]
   );
+  {console.log({memes})}
 
   return (
     <div className="flex flex-col items-center justify-between h-full">
@@ -54,15 +72,16 @@ export default function StakeMeme() {
           <h2 className="title text-center">Stake meme</h2>
         </div>
       </div>
+
       <div className="snap-y max-h-[460px] w-full px-2 overflow-scroll flex flex-col gap-2">
-        {memes.map((meme: Meme) => (
+        {memes.map((meme: Meme, index: number) => (
           <MemeCoinCard
             key={meme.id}
             meme={meme}
             isSelected={selectedMeme?.id === meme.id}
             onSelect={() => {
               setSelectedMeme(meme);
-              setStakeAmount(null); // Reset stake amount when selecting a new meme
+              setStakeAmount(null);
             }}
           />
         ))}
