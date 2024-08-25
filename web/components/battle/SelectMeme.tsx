@@ -62,7 +62,7 @@ export default function SelectMeme() {
           />
         ))}
       </div>
-      <div className="p-4 w-full">
+      <div className="w-full">
         <Button
           onClick={() => setGameStage('battlePreparation')}
           visible={canStartFight}

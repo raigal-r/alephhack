@@ -62,8 +62,8 @@ export const memes: Meme[] = [
   },
   {
     id: 5,
-    name: 'MAGAIBA',
-    imageSrc: '/images/memes/magaiba.png',
+    name: 'BOBO',
+    imageSrc: '/images/memes/bobo.png',
     level: 9,
     health: 594,
     attack: 34,

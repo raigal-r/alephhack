@@ -31,11 +31,11 @@ export default function BattlePreparation() {
   };
   const cutMemes = memes.slice(0, 3);
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full">
       <h2 className="title text-center my-4">
         {battleState.battleStarted ? 'Battle found!' : 'Finding battle...'}
       </h2>
-      <div className="flex items-center justify-between px-2 flex-grow">
+      <div className="flex items-center justify-between px-2 w-full">
         <div className="w-[45%] flex flex-col items-center">
           <h3 className="text-lg font-bold mb-2 text-blue-800">Your team</h3>
           <div className="flex flex-col gap-2 w-full">
