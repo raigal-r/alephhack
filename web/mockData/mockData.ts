@@ -43,40 +43,7 @@ export const memes: Meme[] = [
       },
     ],
   },
-  {
-    id: 'WIF',
-    name: 'WIF',
-    imageSrc: '/images/memes/wif.png',
-    level: 23,
-    health: 400,
-    attack: 594,
-    critChance: 594,
-    speed: 400,
-    defense: 80,
-    balance: 0,
-    powers: [
-      {
-        name: 'Home run hit',
-        src: '/images/cards/bonk-cards/home-run-hit.png',
-        powerValue: 10,
-      },
-      {
-        name: 'Golden bat',
-        src: '/images/cards/bonk-cards/golden-bat.png',
-        powerValue: 50,
-      },
-      {
-        name: 'Running attack',
-        src: '/images/cards/bonk-cards/running-attack.png',
-        powerValue: 20,
-      },
-      {
-        name: 'Bat block',
-        src: '/images/cards/bonk-cards/bat-block.png',
-        powerValue: 15,
-      },
-    ],
-  },
+
   {
     id: 'MOG',
     name: 'MOG',
@@ -120,49 +87,23 @@ export const memes: Meme[] = [
     balance: 0,
     powers: [
       {
-        name: 'Smash',
+        name: 'Home run hit',
+        src: '/images/cards/bonk-cards/home-run-hit.png',
         powerValue: 10,
       },
       {
-        name: 'Splash',
+        name: 'Golden bat',
+        src: '/images/cards/bonk-cards/golden-bat.png',
         powerValue: 20,
       },
       {
-        name: 'Blast',
+        name: 'Running attack',
+        src: '/images/cards/bonk-cards/running-attack.png',
         powerValue: 30,
       },
       {
-        name: 'Zap',
-        powerValue: 40,
-      },
-    ],
-  },
-  {
-    id: 'BOBO',
-    name: 'BOBO',
-    imageSrc: '/images/memes/bobo.png',
-    level: 9,
-    health: 594,
-    attack: 34,
-    critChance: 100,
-    speed: 200,
-    defense: 24,
-    balance: 0,
-    powers: [
-      {
-        name: 'Smash',
-        powerValue: 10,
-      },
-      {
-        name: 'Splash',
-        powerValue: 20,
-      },
-      {
-        name: 'Blast',
-        powerValue: 30,
-      },
-      {
-        name: 'Zap',
+        name: 'Bat block',
+        src: '/images/cards/bonk-cards/bat-block.png',
         powerValue: 40,
       },
     ],
