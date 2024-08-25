@@ -83,7 +83,7 @@ This is a React app that uses the Anchor generated client to interact with the S
 Start the web app
 
 ```shell
-npm run dev
+yarn dev
 ```
 
 Build the web app
