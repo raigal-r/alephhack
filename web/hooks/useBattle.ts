@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 
-interface MemeState {
+interface Meme {
   id: string;
   health: number;
   powers: { name: string }[];
@@ -10,8 +10,8 @@ interface MemeState {
 interface BattleState {
   battleStarted: boolean;
   opponentId: string | null;
-  playerMemes: Record<string, MemeState>;
-  opponentMemes: Record<string, MemeState>;
+  playerMemes: Record<string, Meme>;
+  opponentMemes: Record<string, Meme>;
 }
 
 export function useBattle() {
@@ -62,7 +62,7 @@ export function useBattle() {
               acc[meme.id] = meme;
               return acc;
             },
-            {} as Record<string, MemeState>
+            {} as Record<string, Meme>
           );
 
           return {
@@ -83,7 +83,7 @@ export function useBattle() {
               acc[meme.id] = meme;
               return acc;
             },
-            {} as Record<string, MemeState>
+            {} as Record<string, Meme>
           );
           return {
             ...prevState,
