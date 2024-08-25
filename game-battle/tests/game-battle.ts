@@ -66,7 +66,7 @@ describe("game-battle", () => {
 
     //const tx = await program.methods.initialize("yourName", 100).rpc();
 
-    const tx = await program.methods.initialize("yourName", 100)
+    const tx = await program.methods.initialize("BattleArena", 100)
     .accountsPartial({
       marketplace: marketplace,
       admin: admin.publicKey,

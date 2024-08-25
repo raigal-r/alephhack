@@ -25,11 +25,6 @@ pub use errors::*;
 pub mod game_battle {
     use super::*;
 
-    // pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-    //     //msg!("Greetings from: {:?}", ctx.program_id);
-    //     Ok(())
-    // }
-
     pub fn initialize(ctx: Context<Initialize>, name: String, fee: u16) -> Result<()> {
         ctx.accounts.init(name, fee, &ctx.bumps) // Removed the semicolon here
     }
