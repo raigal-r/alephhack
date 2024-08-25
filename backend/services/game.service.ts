@@ -14,7 +14,7 @@ export class GameService {
   handleJoin(wsConnection: WebSocket, data: any) {
     const { playerId } = data;
     this.playerProvider.addPlayer(playerId, wsConnection);
-
+    
     wsConnection.send(JSON.stringify({
       status: 'joined',
       playerId,
@@ -85,11 +85,15 @@ export class GameService {
 
   private startGameIfReady() {
     const players = this.playerProvider.getPlayers();
-    if (Object.keys(players).length >= 2) {
-      const player1 = players[Object.keys(players)[0]];
-      const player2 = players[Object.keys(players)[1]];
+    const playerIds = Object.keys(players);
+    console.log({length:playerIds.length})
+    if (playerIds.length >= 2) {
+      playerIds.sort(); 
+  
+      const player1 = players[playerIds[0]];
+      const player2 = players[playerIds[1]];
+      
       this.battleProvider.createBattle(player1, player2);
-
       player1.socket.send(JSON.stringify({
         status: 'battle_started',
         opponentId: player2.id,
@@ -102,10 +106,11 @@ export class GameService {
         playerMemes: player2.memes,
         opponentMemes: player1.memes
       }));
+      console.log('Battle start!')
+
     } else {
       console.log('[GameService] Not enough players to start the game');
     }
-
-    
   }
+  
 }

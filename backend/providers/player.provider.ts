@@ -35,6 +35,15 @@ export class PlayerProvider {
     return player ? player.memes : undefined;
   }
 
+  getPlayerIdBySocket(socket: WebSocket): string | null {
+    for (const playerId in this.players) {
+      if (this.players[playerId].socket === socket) {
+        return playerId;
+      }
+    }
+    return null;
+  }
+  
   updateMemeHealth(playerId: string, memeId: string, damage: number): number | null {
     const player = this.players[playerId];
     if (player) {

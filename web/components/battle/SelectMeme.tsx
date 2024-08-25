@@ -35,7 +35,7 @@ export default function SelectMeme() {
         }))
       );
     }
-  }, [tokenBalances, memes]);
+  }, [tokenBalances]);
 
   const canStartFight = selectedMemes.length === 3;
 
