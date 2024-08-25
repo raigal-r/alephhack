@@ -21,13 +21,13 @@ cd <repo-name>
 #### Install Dependencies
 
 ```shell
-npm install
+yarn install
 ```
 
 #### Start the web app
 
 ```
-npm run dev
+yarn dev
 ```
 
 ## Apps
