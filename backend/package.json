@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/web3.js": "^1.95.3",
     "fastify": "^4.28.1",
     "pino-pretty": "^11.2.1",
     "ws": "^8.18.0"
