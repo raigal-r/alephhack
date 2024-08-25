@@ -39,7 +39,6 @@ export default function SelectMeme() {
 
   const canStartFight = selectedMemes.length === 3;
 
-  console.log({tokenBalances});
 
   return (
     <div className="flex flex-col items-center justify-between h-full">
