@@ -33,7 +33,6 @@ export default function MemeCard({
       <div className="flex flex-col gap-1">
         <p className="m-0">LVL {meme.level}</p>
         <h3 className="text-2xl"> $ {meme.name}</h3>
-        <p className="m-0">Balance: {meme.balance}</p>
       </div>
     </div>
   );
