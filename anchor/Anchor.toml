@@ -1,28 +1,19 @@
 [toolchain]
 
 [features]
-seeds = false
+resolution = true
 skip-lint = false
-
-[programs.localnet]
-counter = "GAKQzDg7HqRVGLeijMene3YpaxgpCW1LydpA2r78pyqy"
 
 [registry]
 url = "https://api.apr.dev"
 
+[programs.devnet]
+game_battle = "C5XKtCrPq3GmZKjUj4uVcHWAQgUZuQC9Pz3jjxd9Mt53"
+
 [provider]
-cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "https://api.devnet.solana.com"
+wallet = "/Users/raigal/my-solana-wallet/mykeypair.json"
 
 [scripts]
-test = "../node_modules/.bin/nx run anchor:jest"
-
-[test]
-startup_wait = 5000
-shutdown_wait = 2000
-upgradeable = false
-
-[test.validator]
-bind_address = "127.0.0.1"
-ledger = ".anchor/test-ledger"
-rpc_port = 8899
+test = "cargo test-bpf"
+init = "/scripts/init.js"
