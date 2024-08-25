@@ -22,7 +22,7 @@ export const memes: Meme[] = [
     critical: 120,
     speed: 200,
     defense: 57,
-    balance: 1300,
+    balance: 0,
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ export const memes: Meme[] = [
     critical: 594,
     speed: 400,
     defense: 80,
-    balance: 40,
+    balance: 0,
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ export const memes: Meme[] = [
     critical: 40,
     speed: 600,
     defense: 120,
-    balance: 245,
+    balance: 0,
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ export const memes: Meme[] = [
     critical: 300,
     speed: 300,
     defense: 14,
-    balance: 1900,
+    balance: 0,
   },
   {
     id: 5,
@@ -70,6 +70,6 @@ export const memes: Meme[] = [
     critical: 100,
     speed: 200,
     defense: 24,
-    balance: 234,
+    balance: 0,
   },
 ];

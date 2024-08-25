@@ -6,6 +6,7 @@ import {
   IconSword,
   IconShoe,
   IconShield,
+  IconSparkles,
 } from '@tabler/icons-react';
 import Image from 'next/image';
 import { Meme } from '@/mockData/mockData';
@@ -33,23 +34,16 @@ export default function MemeCard({
         <Image src={meme.imageSrc} width={95} height={95} alt={meme.name} />
       </div>
       <div>
-        <div className='flex gap-6'>
+        <div className="flex gap-6">
           <div className="pb-2">LVL {meme.level}</div>
           <div className="pb-2">Balamce {meme.balance}</div>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 max-w-[220px]">
           {[
             { Icon: IconApple, value: meme.health },
             { Icon: IconSword, value: meme.attack },
             {
-              Icon: () => (
-                <Image
-                  src="/images/stats/critico.svg"
-                  width={22}
-                  height={22}
-                  alt="Critical"
-                />
-              ),
+              Icon: IconSparkles,
               value: meme.critical,
             },
             { Icon: IconShoe, value: meme.speed },

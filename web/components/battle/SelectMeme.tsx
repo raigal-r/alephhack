@@ -13,7 +13,9 @@ export default function SelectMeme() {
   const [selectedMemes, setSelectedMemes] = useState<number[]>([]);
   const [memes, setMemes] = useState<Meme[]>(initialMemes);
   const wallet = useWallet();
-  const { data: tokenBalances } = useGetTokenBalances({ address: wallet.publicKey! });
+  const { data: tokenBalances } = useGetTokenBalances({
+    address: wallet.publicKey!,
+  });
 
   const handleSelectMeme = useCallback((memeId: number) => {
     setSelectedMemes((prevSelected) => {
@@ -28,17 +30,16 @@ export default function SelectMeme() {
 
   useEffect(() => {
     if (tokenBalances && tokenBalances.length > 0) {
-      setMemes(prevMemes =>
+      setMemes((prevMemes) =>
         prevMemes.map((meme, index) => ({
           ...meme,
-          balance: tokenBalances[index % tokenBalances.length].balance
+          balance: tokenBalances[index % tokenBalances.length].balance,
         }))
       );
     }
-  }, [tokenBalances, memes]);
+  }, [tokenBalances]);
 
   const canStartFight = selectedMemes.length === 3;
-
 
   return (
     <div className="flex flex-col items-center justify-between h-full">
