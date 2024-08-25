@@ -1,6 +1,7 @@
 import WebSocket from 'ws';
 import { GameService } from '../services/game.service';
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { PlayerProvider } from '../providers/player.provider';
 
 // Constantes para las acciones
 const JOIN_ACTION = 'join';
@@ -157,9 +158,11 @@ export const memes: Meme[] = [
 
 export class GameController {
   gameService: GameService;
+  playerProvider: PlayerProvider;
 
   constructor() {
     this.gameService = new GameService();
+    this.playerProvider = new PlayerProvider();
   }
 
   handleConnection(wsConnection: WebSocket) {
@@ -202,9 +205,15 @@ export class GameController {
     });
 
     wsConnection.on('close', () => {
-      console.log('[GameController] Client disconnected');
+      const playerId = this.playerProvider.getPlayerIdBySocket(wsConnection);
+      if (playerId) {
+        this.playerProvider.removePlayer(playerId);
+        console.log(`[GameController] Player ${playerId} disconnected`);
+      }
     });
   }
+
+  
   async getPlayerMemes(request: FastifyRequest, reply: FastifyReply) {
     const availableMemes: any[] = [];
 
