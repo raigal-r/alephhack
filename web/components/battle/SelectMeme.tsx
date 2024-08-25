@@ -31,7 +31,7 @@ export default function SelectMeme() {
         Stake meme
       </Button>
       <div className="flex p-2 text-black w-full justify-between">
-        <div className="text-xl">Select your memes</div>
+        <div className="text-xl font-thin">Select your memes</div>
         <div>{selectedMemes.length}/3</div>
       </div>
 
@@ -45,7 +45,7 @@ export default function SelectMeme() {
           />
         ))}
       </div>
-      <div className="p-4">
+      <div className="p-4 w-full">
         <Button
           onClick={() => setGameStage('battlePreparation')}
           visible={canStartFight}

@@ -43,10 +43,10 @@ export default function StakeMeme() {
 
   return (
     <div className="flex flex-col items-center justify-between h-full">
-      <div className="flex justify-center items-center relative w-full pb-4">
+      <div className="flex justify-center items-center relative w-full pb-4 px-2">
         <Button
           onClick={() => setGameStage('selectMeme')}
-          className="!w-fit absolute top-0 left-0"
+          className="!w-fit absolute top-0 left-2"
         >
           <IconArrowBackUp />
         </Button>

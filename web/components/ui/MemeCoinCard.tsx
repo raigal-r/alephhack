@@ -16,8 +16,8 @@ export default function MemeCard({
 }: MemeCardProps) {
   return (
     <div
-      className={`w-full flex border-2 gap-3 border-black p-4 text-black list-none cursor-pointer ${
-        isSelected ? 'border-4 bg-[#FEF9C3]' : ''
+      className={`w-full max-w-[390px] flex border-2 gap-3 border-black p-4 text-black list-none cursor-pointer ${
+        isSelected ? ' bg-[#FEF9C3]' : ''
       }`}
       onClick={onSelect}
     >

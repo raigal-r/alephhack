@@ -10,7 +10,7 @@ const BattlePage: React.FC = () => {
   const { gameStage, setGameStage } = useGameStage();
 
   return (
-    <section className="h-full pb-2 pt-6 max-w-md mx-auto max-h-[1080px] text-black">
+    <section className="h-full pb-2 pt-6 max-w-[420px] mx-auto max-h-[1080px] text-black">
       {gameStage === 'selectMeme' && <SelectMeme />}
       {gameStage === 'stakeMeme' && <StakeMeme />}
       {gameStage === 'battlePreparation' && <BattlePreparation />}
