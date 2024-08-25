@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.ts",
+    "dev": "nodemon app.ts",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/web3.js": "^1.95.3",
+    "fastify": "^4.28.1",
+    "pino-pretty": "^11.2.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.12",
+    "@types/pino": "^7.0.5",
+    "@types/ws": "^8.5.11",
+    "nodemon": "^3.1.4",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

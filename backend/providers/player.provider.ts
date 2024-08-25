@@ -1,0 +1,65 @@
+import WebSocket from 'ws';
+import { Player } from '../models/player.model';
+import { MemeProvider } from './meme.provider';
+import { Meme } from '../models/meme.model';
+
+export class PlayerProvider {
+  private players: Record<string, Player> = {};
+  private memeProvider: MemeProvider;
+
+  constructor() {
+    this.memeProvider = new MemeProvider();
+  }
+
+  addPlayer(playerId: string, socket: WebSocket) {
+    const memes = this.memeProvider.assignMemesToPlayer();
+    this.players[playerId] = { id: playerId, socket, memes };
+    console.log(`[PlayerProvider] Player ${playerId} added with memes:`, memes);
+  }
+
+  removePlayer(playerId: string) {
+    delete this.players[playerId];
+    console.log(`[PlayerProvider] Player ${playerId} removed`);
+  }
+
+  getPlayer(playerId: string): Player | undefined {
+    return this.players[playerId];
+  }
+
+  getPlayers(): Record<string, Player> {
+    return this.players;
+  }
+
+  getMemesForPlayer(playerId: string): Meme[] | undefined {
+    const player = this.players[playerId];
+    return player ? player.memes : undefined;
+  }
+
+  getPlayerIdBySocket(socket: WebSocket): string | null {
+    for (const playerId in this.players) {
+      if (this.players[playerId].socket === socket) {
+        return playerId;
+      }
+    }
+    return null;
+  }
+  
+  updateMemeHealth(playerId: string, memeId: string, damage: number): number | null {
+    const player = this.players[playerId];
+    if (player) {
+      const meme = player.memes.find(m => m.id === memeId);
+      if (meme) {
+        return this.memeProvider.updateMemeHealth(meme, damage);
+      }
+    }
+    return null;
+  }
+
+  areAllMemesDefeated(playerId: string): boolean {
+    const player = this.players[playerId];
+    if (player) {
+      return player.memes.every(meme => this.memeProvider.isMemeDefeated(meme));
+    }
+    return false;
+  }
+}

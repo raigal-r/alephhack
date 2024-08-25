@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=DotGothic16&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  font-family: 'VT323', 'DotGothic16', sans-serif;
+}
+
+.wallet-adapter-button-trigger {
+  @apply !bg-primary;
+  border-radius: 2px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+.wallet-adapter-dropdown-list,
+.wallet-adapter-button {
+  font-family: inherit !important;
+}
+
+.btn,
+.menu,
+.dropdown-content,
+.wallet-adapter-dropdown-list,
+.wallet-adapter-dropdown-list-active,
+.wallet-adapter-modal-wrapper {
+  border-radius: 2px !important;
+}
+/* class="wallet-adapter-dropdown-list wallet-adapter-dropdown-list-active" */
+.menu,
+.dropdown-content,
+.wallet-adapter-dropdown-list,
+.wallet-adapter-dropdown-list-active,
+.wallet-adapter-modal-wrapper {
+  @apply !bg-black text-white ;
+
+}
+
+li a.active,
+li {
+  border-radius: 2px !important;
+}
+
+.border-radius {
+  border-radius: 2px !important;
+}
+
+.title {
+  @apply text-4xl uppercase leading-9 tracking-tight sm:text-5xl;
+}
+
+p {
+  @apply mb-2 text-lg leading-7 md:text-xl text-black;
+}
+
+button {
+  @apply text-white bg-black;
+}
