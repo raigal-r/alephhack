@@ -1,12 +1,9 @@
 # scaffold-v2
 
-This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
+# Meme Arena
 
-## Getting Started
-
-### Prerequisites
-
-- Node v18.18.0 or higher
+Contracts are in the branch "rust". 
+Deployed Program: https://explorer.solana.com/address/C5XKtCrPq3GmZKjUj4uVcHWAQgUZuQC9Pz3jjxd9Mt53?cluster=devnet
 
 - Rust v1.77.2 or higher
 - Anchor CLI 0.30.0 or higher
@@ -24,13 +21,13 @@ cd <repo-name>
 #### Install Dependencies
 
 ```shell
-npm install
+yarn install
 ```
 
 #### Start the web app
 
 ```
-npm run dev
+yarn dev
 ```
 
 ## Apps
@@ -86,7 +83,7 @@ This is a React app that uses the Anchor generated client to interact with the S
 Start the web app
 
 ```shell
-npm run dev
+yarn dev
 ```
 
 Build the web app
