@@ -7,6 +7,7 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
+  TransactionInstruction,
   TransactionMessage,
   TransactionSignature,
   VersionedTransaction,
@@ -14,7 +15,8 @@ import {
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useTransactionToast } from '../ui/ui-layout';
-
+import { BN } from '@coral-xyz/anchor';
+import crypto from 'crypto';
 export function useGetBalance({ address }: { address: PublicKey }) {
   const { connection } = useConnection();
 
@@ -68,6 +70,7 @@ export function useTransferSol({ address }: { address: PublicKey }) {
     ],
     mutationFn: async (input: { destination: PublicKey; amount: number }) => {
       let signature: TransactionSignature = '';
+      console.log('dajbnbndsabna')
       try {
         const { transaction, latestBlockhash } = await createTransaction({
           publicKey: address,
@@ -197,4 +200,57 @@ async function createTransaction({
     transaction,
     latestBlockhash,
   };
+}
+
+export async function createListTransaction({
+  programId,
+  token,
+  amount,
+  connection,
+  walletPublicKey,
+}: {
+  programId: PublicKey;
+  token: PublicKey;
+  amount: number;
+  connection: Connection;
+  walletPublicKey: PublicKey;
+}): Promise<VersionedTransaction> {
+  const latestBlockhash = await connection.getLatestBlockhash();
+
+  // Define the accounts required by the `list` instruction
+  const accounts = [
+    {
+      pubkey: walletPublicKey,
+      isSigner: true,
+      isWritable: true,
+    },
+    {
+      pubkey: token,
+      isSigner: false,
+      isWritable: false,
+    },
+  ];
+  const hash = crypto.createHash('sha256').update('list').digest();
+  const listDiscriminant = hash.readUInt32LE(0);
+  // Create the instruction to call the `list` function
+  const listInstruction = new TransactionInstruction({
+    keys: accounts,
+    programId,
+    data: Buffer.from(
+      Uint8Array.of(
+        listDiscriminant, // Reemplaza 0 con el valor del discriminante del método `list`
+        ...new BN(amount).toArray('le', 8)
+      )
+    ),
+  });
+
+  const message = new TransactionMessage({
+    payerKey: walletPublicKey,
+    recentBlockhash: latestBlockhash.blockhash,
+    instructions: [listInstruction],
+  }).compileToLegacyMessage();
+
+  const transaction = new VersionedTransaction(message);
+
+  return transaction;
 }

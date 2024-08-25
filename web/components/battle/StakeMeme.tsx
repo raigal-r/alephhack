@@ -7,6 +7,37 @@ import Image from 'next/image';
 import { IconArrowBackUp } from '@tabler/icons-react';
 import { useGetTokenBalances } from '../../hooks/useBalances';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useTransferSol } from '@/components/account/account-data-access';
+import { PublicKey } from '@solana/web3.js';
+
+function DepositButton() {
+  const [destination, setDestination] = useState('');  // Dirección de destino
+  const [amount, setAmount] = useState(0);             // Cantidad de SOL a transferir
+  const { publicKey } = useWallet()
+  const { mutate: transferSol, error, isSuccess } = useTransferSol({
+    address: publicKey!,
+  });
+
+  const handleDeposit = () => {
+    try {
+      const destinationPubKey = new PublicKey('5vij9MP3T9t9Dy6rXYWeZeMZK53hgHKyAQEK88fJmWwP');
+    } catch (err) {
+      console.error('Invalid public key:', err);
+    }
+  };
+
+  return (
+    <div>
+
+      <button onClick={handleDeposit} disabled={!amount || !destination}>
+        {`Deposit ${amount} SOL`}
+      </button>
+      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+      {isSuccess && <p style={{ color: 'green' }}>Deposit successful!</p>}
+    </div>
+  );
+}
+
 
 export default function StakeMeme() {
   const { setGameStage } = useGameStage();
@@ -15,6 +46,7 @@ export default function StakeMeme() {
   const [memes, setMemes] = useState<Meme[]>(initialMemes);
   const wallet = useWallet();
   const { data: tokenBalances } = useGetTokenBalances({ address: wallet.publicKey! });
+
 
 
   useEffect(() => {
@@ -26,18 +58,8 @@ export default function StakeMeme() {
         }))
       );
     }
-  }, [tokenBalances, memes]);
+  }, [tokenBalances]);
 
-  const handleStake = useCallback(() => {
-    if (selectedMeme && stakeAmount !== null) {
-      if (stakeAmount > 0 && stakeAmount <= (selectedMeme.balance ?? 0)) {
-        console.log(`Staking ${stakeAmount} of ${selectedMeme.name}`);
-        // Here you would typically call a function to perform the actual staking
-      } else {
-        alert('Invalid stake amount');
-      }
-    }
-  }, [selectedMeme, stakeAmount]);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +141,7 @@ export default function StakeMeme() {
                 max={selectedMeme.balance}
               />
             </div>
-            <Button
+            {/* <Button
               onClick={handleStake}
               disabled={stakeAmount === null || stakeAmount === 0}
               className={`${
@@ -129,7 +151,8 @@ export default function StakeMeme() {
               }`}
             >
               Stake
-            </Button>
+            </Button> */}
+            <DepositButton/>
           </>
         ) : (
           <div className="flex items-center justify-center h-full">
