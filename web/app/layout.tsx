@@ -4,6 +4,7 @@ import { ClusterProvider } from '@/components/cluster/cluster-data-access';
 import { SolanaProvider } from '@/components/solana/solana-provider';
 import { ReactQueryProvider } from './react-query-provider';
 import { GameStageProvider } from '@/components/providers/GameStageProvider';
+import MiniKitProvider from '@/minikit-provider';
 
 export const metadata = {
   title: 'Meme Wars',
@@ -26,15 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryProvider>
-          <ClusterProvider>
-            <SolanaProvider>
-              <GameStageProvider>
-                <UiLayout links={links}>{children}</UiLayout>
-              </GameStageProvider>
-            </SolanaProvider>
-          </ClusterProvider>
-        </ReactQueryProvider>
+          <ReactQueryProvider>
+            <ClusterProvider>
+              <SolanaProvider>
+                <GameStageProvider>
+                  <MiniKitProvider>
+                    <UiLayout links={links}>{children}</UiLayout>
+                  </MiniKitProvider>
+                </GameStageProvider>
+              </SolanaProvider>
+            </ClusterProvider>
+          </ReactQueryProvider>
       </body>
     </html>
   );
