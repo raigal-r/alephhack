@@ -31,7 +31,7 @@ export default function MemeCard({
     >
       <div className="min-w-[100px]">
         <div>$ {meme.name}</div>
-        <Image src={meme.imageSrc} width={95} height={95} alt={meme.name} />
+        <Image src={meme?.imageSrc ?? ""} width={95} height={95} alt={meme.name} />
       </div>
       <div>
         <div className="flex gap-6">
@@ -44,7 +44,7 @@ export default function MemeCard({
             { Icon: IconSword, value: meme.attack },
             {
               Icon: IconSparkles,
-              value: meme.critical,
+              value: meme.critChance,
             },
             { Icon: IconShoe, value: meme.speed },
             { Icon: IconShield, value: meme.defense },
