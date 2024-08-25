@@ -51,7 +51,7 @@ export default function StakeMeme() {
           <IconArrowBackUp />
         </Button>
         <div className="h-[48px] flex items-center justify-center">
-          <h2 className="title text-center">Select meme</h2>
+          <h2 className="title text-center">Stake meme</h2>
         </div>
       </div>
       <div className="snap-y max-h-[460px] w-full px-2 overflow-scroll flex flex-col gap-2">
@@ -109,7 +109,7 @@ export default function StakeMeme() {
                   : ''
               }`}
             >
-              Stake meme
+              Stake
             </Button>
           </>
         ) : (
