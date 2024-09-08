@@ -2,7 +2,21 @@
 
 # Meme Arena
 
-Contracts are in the branch "rust". 
+## Sign protocol
+Schema deployment (Sepolia): 
+https://sepolia.etherscan.io/tx/0x1c7d553e9286602a90b228cc0effaa93193c4986c096e668dedb946d68a6ff16
+https://testnet-scan.sign.global/schema/onchain_evm_11155111_0x206
+
+
+## Contracts
+
+### ZKSync
+
+Deployed contract in zksync: 0x5d52621c4DC1e647f2A7cBa827b029ca9d7033b8
+https://zksync-sepolia.blockscout.com/address/0x5d52621c4DC1e647f2A7cBa827b029ca9d7033b8
+
+### Solana
+ 
 Deployed Program: https://explorer.solana.com/address/C5XKtCrPq3GmZKjUj4uVcHWAQgUZuQC9Pz3jjxd9Mt53?cluster=devnet
 
 - Rust v1.77.2 or higher
