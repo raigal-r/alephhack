@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 'use client';
 
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';

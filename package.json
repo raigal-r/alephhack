@@ -17,6 +17,7 @@
   "private": true,
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.0",
+    "@ethsign/sp-sdk": "^0.7.3",
     "@solana-developers/preset-next": "3.0.1",
     "@solana/spl-token": "0.4.6",
     "@solana/wallet-adapter-base": "^0.9.23",

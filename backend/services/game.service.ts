@@ -2,13 +2,76 @@ import WebSocket from 'ws';
 import { PlayerProvider } from '../providers/player.provider';
 import { BattleProvider } from '../providers/battle.provider';
 
+//Sign protocol imports
+import { SignProtocolClient, SpMode, EvmChains } from "@ethsign/sp-sdk";
+import { privateKeyToAccount } from "viem/accounts";
+import { Web3Provider } from "@ethersproject/providers";
+import { BigNumber, Contract, ethers } from "ethers";
+
+
 export class GameService {
   private playerProvider: PlayerProvider;
   private battleProvider: BattleProvider;
 
   constructor() {
     this.playerProvider = new PlayerProvider();
-    this.battleProvider = new BattleProvider();
+    this.battleProvider = new BattleProvider(); 
+  }
+
+  handleAttestation(playerA: string,
+    playerB: string,
+    winner: string,
+    amount: BigNumber,
+    ){
+    
+    const address: string = process.env.PUBLIC_KEY || ''; // Provide a default value or handle undefined
+    // Encode the schema data: playerA, playerB, winner, amount
+    const schemaData: string = ethers.utils.defaultAbiCoder.encode(
+      ["address", "address", "address", "uint256"],
+      [playerA, playerB, winner, amount]
+    );
+
+    // Standard setup for the contract
+    const provider = new ethers.providers.JsonRpcProvider(
+    // Get an RPC URL (such as an infura link) to connect to the network
+    getProviderUrl(84532)
+    );
+
+    const contract = new Contract(CONTRACT_ADDRESS(0x878c92FD89d8E0B93Dc0a3c907A2adc7577e39c5), ISPABI.abi, provider);
+
+    const library = new Web3Provider(await connector.getProvider());
+
+    const instance = contract.connect(library.getSigner() as any) as Contract;
+
+    try {
+      const tx = await instance[
+        "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),string,bytes,bytes)"
+      ](
+        {
+          schemaId: BigNumber.from("0x34"), // The final number from our schema's ID.
+          linkedAttestationId: 0, // We are not linking an attestation.
+          attestTimestamp: 0, // Will be generated for us.
+          revokeTimestamp: 0, // Attestation is not revoked.
+          attester: address, // Alice's address.
+          validUntil: 0, // We are not setting an expiry date.
+          dataLocation: 0, // We are placing data on-chain.
+          revoked: false, // The attestation is not revoked.
+          recipients: [winner], // The winner is our recipient.
+          data: schemaData, // The encoded schema data (playerA, playerB, winner, amount)
+        },
+        winner.toLowerCase(), // Winner's lowercase address will be our indexing key.
+        "0x", // No delegate signature.
+        "0x00" // No extra data.
+      );
+      
+      const res = await tx.wait(1);
+      console.log("success", res);
+      // You can find the attestation's ID using the following path:
+      // res.events[0].args.attestationId
+    } catch (err: any) {
+      console.error(err?.message ? err.message : err);
+    }
+  
   }
 
   handleJoin(wsConnection: WebSocket, data: any) {
