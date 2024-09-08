@@ -2,7 +2,7 @@
 
 # Meme Arena
 
-##Sign protocol
+## Sign protocol
 Schema deployment (Sepolia): 
 https://sepolia.etherscan.io/tx/0x1c7d553e9286602a90b228cc0effaa93193c4986c096e668dedb946d68a6ff16
 https://testnet-scan.sign.global/schema/onchain_evm_11155111_0x206
