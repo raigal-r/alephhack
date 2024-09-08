@@ -12,10 +12,11 @@ https://testnet-scan.sign.global/schema/onchain_evm_11155111_0x206
 
 ### ZKSync
 
+Deployed contract in zksync: 0x5d52621c4DC1e647f2A7cBa827b029ca9d7033b8
+https://zksync-sepolia.blockscout.com/address/0x5d52621c4DC1e647f2A7cBa827b029ca9d7033b8
 
 ### Solana
-
-Contracts are in the branch "rust". 
+ 
 Deployed Program: https://explorer.solana.com/address/C5XKtCrPq3GmZKjUj4uVcHWAQgUZuQC9Pz3jjxd9Mt53?cluster=devnet
 
 - Rust v1.77.2 or higher
